@@ -9,16 +9,16 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class ThreadSafeRepository<K,E> implements IRepository<K,E> {
 
     protected ReentrantReadWriteLock lock;
-    protected IRepository<K,E> repository;
+    protected IRepository<K,E> sourceRepository;
 
 
-    public ThreadSafeRepository(IRepository<K,E> repository, ReentrantReadWriteLock lock) {
-        this.repository = repository;
+    public ThreadSafeRepository(IRepository<K,E> sourceRepository, ReentrantReadWriteLock lock) {
+        this.sourceRepository = sourceRepository;
         this.lock = lock;
     }
 
-    public ThreadSafeRepository(IRepository<K,E> repository) {
-        this(repository, new ReentrantReadWriteLock());
+    public ThreadSafeRepository(IRepository<K,E> sourceRepository) {
+        this(sourceRepository, new ReentrantReadWriteLock());
     }
 
 
@@ -27,7 +27,7 @@ public class ThreadSafeRepository<K,E> implements IRepository<K,E> {
         this.lock.readLock().lock();
 
         try {
-            return this.repository.getAll();
+            return this.sourceRepository.getAll();
         } finally {
             this.lock.readLock().unlock();
         }
@@ -38,7 +38,7 @@ public class ThreadSafeRepository<K,E> implements IRepository<K,E> {
         this.lock.readLock().lock();
 
         try {
-            return this.repository.get(key);
+            return this.sourceRepository.get(key);
         } finally {
             this.lock.readLock().unlock();
         }
@@ -49,7 +49,7 @@ public class ThreadSafeRepository<K,E> implements IRepository<K,E> {
         this.lock.writeLock().lock();
 
         try {
-            this.repository.insert(entity);
+            this.sourceRepository.insert(entity);
         } finally {
             this.lock.writeLock().unlock();
         }
@@ -60,7 +60,7 @@ public class ThreadSafeRepository<K,E> implements IRepository<K,E> {
         this.lock.writeLock().lock();
 
         try {
-            this.repository.update(entity);
+            this.sourceRepository.update(entity);
         } finally {
             this.lock.writeLock().unlock();
         }
@@ -71,7 +71,7 @@ public class ThreadSafeRepository<K,E> implements IRepository<K,E> {
         this.lock.writeLock().lock();
 
         try {
-            this.repository.delete(key);
+            this.sourceRepository.delete(key);
         } finally {
             this.lock.writeLock().unlock();
         }

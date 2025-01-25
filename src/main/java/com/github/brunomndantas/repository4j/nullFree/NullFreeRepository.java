@@ -8,17 +8,17 @@ import java.util.LinkedList;
 
 public class NullFreeRepository<K,E> implements IRepository<K,E> {
 
-    protected IRepository<K,E> repository;
+    protected IRepository<K,E> sourceRepository;
 
 
-    public NullFreeRepository(IRepository<K,E> repository) {
-        this.repository = repository;
+    public NullFreeRepository(IRepository<K,E> sourceRepository) {
+        this.sourceRepository = sourceRepository;
     }
 
 
     @Override
     public Collection<E> getAll() throws RepositoryException {
-        Collection<E> entities = this.repository.getAll();
+        Collection<E> entities = this.sourceRepository.getAll();
 
         if(entities == null) {
              entities = new LinkedList<>();
@@ -29,7 +29,7 @@ public class NullFreeRepository<K,E> implements IRepository<K,E> {
 
     @Override
     public E get(K key) throws RepositoryException {
-        return this.repository.get(key);
+        return this.sourceRepository.get(key);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class NullFreeRepository<K,E> implements IRepository<K,E> {
             throw new IllegalArgumentException("Entity cannot be null!");
         }
 
-        this.repository.insert(entity);
+        this.sourceRepository.insert(entity);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class NullFreeRepository<K,E> implements IRepository<K,E> {
             throw new IllegalArgumentException("Entity cannot be null!");
         }
 
-        this.repository.update(entity);
+        this.sourceRepository.update(entity);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class NullFreeRepository<K,E> implements IRepository<K,E> {
             throw new IllegalArgumentException("Key cannot be null!");
         }
 
-        this.repository.delete(key);
+        this.sourceRepository.delete(key);
     }
 
 }
