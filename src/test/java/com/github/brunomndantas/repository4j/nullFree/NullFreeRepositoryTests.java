@@ -35,6 +35,14 @@ public class NullFreeRepositoryTests extends RepositoryTests {
     }
 
     @Test
+    public void shouldNotAllowNullKeyOnGet() {
+        NullFreeRepository<String,Person> repository = createRepository();
+
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> repository.get(null));
+        Assertions.assertEquals("Key cannot be null!", exception.getMessage());
+    }
+
+    @Test
     public void shouldNotAllowNullEntityOnInsert() {
         NullFreeRepository<String,Person> repository = createRepository();
 

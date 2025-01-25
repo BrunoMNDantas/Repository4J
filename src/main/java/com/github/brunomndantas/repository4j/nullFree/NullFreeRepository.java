@@ -29,6 +29,10 @@ public class NullFreeRepository<K,E> implements IRepository<K,E> {
 
     @Override
     public E get(K key) throws RepositoryException {
+        if(key == null) {
+            throw new IllegalArgumentException("Key cannot be null!");
+        }
+
         return this.sourceRepository.get(key);
     }
 
