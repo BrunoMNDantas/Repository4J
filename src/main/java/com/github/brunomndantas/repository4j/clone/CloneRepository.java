@@ -8,25 +8,25 @@ import java.util.function.Function;
 
 public class CloneRepository<K,E> implements IRepository<K,E> {
 
-    protected IRepository<K,E> repository;
+    protected IRepository<K,E> sourceRepository;
     protected Function<E,E> cloneFunction;
 
 
-    public CloneRepository(IRepository<K,E> repository, Function<E,E> cloneFunction) {
-        this.repository = repository;
+    public CloneRepository(IRepository<K,E> sourceRepository, Function<E,E> cloneFunction) {
+        this.sourceRepository = sourceRepository;
         this.cloneFunction = cloneFunction;
     }
 
 
     @Override
     public Collection<E> getAll() throws RepositoryException {
-        Collection<E> entities = this.repository.getAll();
+        Collection<E> entities = this.sourceRepository.getAll();
         return entities.stream().map(this.cloneFunction).toList();
     }
 
     @Override
     public E get(K key) throws RepositoryException {
-        E entity = this.repository.get(key);
+        E entity = this.sourceRepository.get(key);
 
         if(entity == null   ) {
             return null;
@@ -38,18 +38,18 @@ public class CloneRepository<K,E> implements IRepository<K,E> {
     @Override
     public void insert(E entity) throws RepositoryException {
         E clone = this.cloneFunction.apply(entity);
-        this.repository.insert(clone);
+        this.sourceRepository.insert(clone);
     }
 
     @Override
     public void update(E entity) throws RepositoryException {
         E clone = this.cloneFunction.apply(entity);
-        this.repository.update(clone);
+        this.sourceRepository.update(clone);
     }
 
     @Override
     public void delete(K key) throws RepositoryException {
-        this.repository.delete(key);
+        this.sourceRepository.delete(key);
     }
 
 }

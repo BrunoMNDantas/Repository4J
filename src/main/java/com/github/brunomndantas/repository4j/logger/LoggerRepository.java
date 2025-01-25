@@ -7,11 +7,11 @@ import java.util.Collection;
 
 public abstract class LoggerRepository<K,E> implements IRepository<K,E> {
 
-    protected IRepository<K,E> repository;
+    protected IRepository<K,E> sourceRepository;
 
 
-    public LoggerRepository(IRepository<K,E> repository) {
-        this.repository = repository;
+    public LoggerRepository(IRepository<K,E> sourceRepository) {
+        this.sourceRepository = sourceRepository;
     }
 
 
@@ -20,7 +20,7 @@ public abstract class LoggerRepository<K,E> implements IRepository<K,E> {
         try {
             logEnteringOnGetAll();
 
-            Collection<E> entities = this.repository.getAll();
+            Collection<E> entities = this.sourceRepository.getAll();
             logReturnOfGetAll(entities);
 
             return entities;
@@ -37,7 +37,7 @@ public abstract class LoggerRepository<K,E> implements IRepository<K,E> {
         try {
             logEnteringOnGet(key);
 
-            E entity = this.repository.get(key);
+            E entity = this.sourceRepository.get(key);
             logReturnOfGet(key, entity);
 
             return entity;
@@ -53,7 +53,7 @@ public abstract class LoggerRepository<K,E> implements IRepository<K,E> {
     public void insert(E entity) throws RepositoryException {
         try {
             logEnteringOnInsert(entity);
-            this.repository.insert(entity);
+            this.sourceRepository.insert(entity);
         } catch (RepositoryException | RuntimeException e) {
             logExceptionOnInsert(entity, e);
             throw e;
@@ -66,7 +66,7 @@ public abstract class LoggerRepository<K,E> implements IRepository<K,E> {
     public void update(E entity) throws RepositoryException {
         try {
             logEnteringOnUpdate(entity);
-            this.repository.update(entity);
+            this.sourceRepository.update(entity);
         } catch (RepositoryException | RuntimeException e) {
             logExceptionOnUpdate(entity, e);
             throw e;
@@ -79,7 +79,7 @@ public abstract class LoggerRepository<K,E> implements IRepository<K,E> {
     public void delete(K key) throws RepositoryException {
         try {
             logEnteringOnDelete(key);
-            this.repository.delete(key);
+            this.sourceRepository.delete(key);
         } catch (RepositoryException | RuntimeException e) {
             logExceptionOnDelete(key, e);
             throw e;
