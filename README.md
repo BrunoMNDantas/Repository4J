@@ -1,9 +1,9 @@
 <h1>Repository4J</h1>
 
-Repository4J is a repository utilitaries library.
+Repository4J is a comprehensive Java library that offers a suite of repository implementations, each tailored to specific storage and operational needs. By adhering to a standardized interface, IRepository, it ensures consistency and flexibility across various data handling scenarios.
 
   #### Gradle
-  
+
 ```groovy
 implementation group: 'com.github.brunomndantas', name: 'repository4j', version: '1.0.0'
 ```
@@ -40,7 +40,7 @@ implementation group: 'com.github.brunomndantas', name: 'repository4j', version:
 
 The interface `IRepository` defines the contract for all repositories.
 
-<p align="center"> 
+<p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/IRepository.png" >
 </p>
 
@@ -56,7 +56,7 @@ Every repository should implement the following methods:
 Let's assume that there is a class `Person` with two properties (`id` and `name`).
 In this section, you will see the **usage** examples using this class just to illustrate how to create instances of these repositories for the `Person` entity.
 
-<p align="center"> 
+<p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/Person.png">
 </p>
 
@@ -64,7 +64,7 @@ In this section, you will see the **usage** examples using this class just to il
 
 `MemoryRepository` is an implementation of repository based on memory. This implementation will use a `Map` to store the entities.
 
-<p align="center"> 
+<p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/MemoryRepository.png">
 </p>
 
@@ -82,7 +82,7 @@ IRepository<String,Person> repository = new MemoryRepository<>(person -> person.
 
 `DiskRepository` is an abstract implementation of repository that relies on the file system. This implementation will store each entity in a distinct file within the directory specified on the constructor. The file name of each entity will be constructed based on the key of the element (key.toString() + "." + fileExtension)
 
-<p align="center"> 
+<p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/DiskRepository.png">
 </p>
 
@@ -94,7 +94,7 @@ IRepository<String,Person> repository = new MemoryRepository<>(person -> person.
 
 `JsonDiskRepository` is an implementation of `DiskRepository`  that will use Json format to store the entities.
 
-<p align="center"> 
+<p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/JsonDiskRepository.png">
 </p>
 
@@ -116,7 +116,7 @@ IRepository<String,Person> repository = new JsonDiskRepository<>(directory, keyE
 - **update(E entity): void** - This operation will be reflected on both repositories (first on source then on cache).
 - **delete(K key): void** - This operation will be reflected on both repositories (first on cache then on source).
 
-<p align="center"> 
+<p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/CacheRepository.png">
 </p>
 
@@ -132,7 +132,7 @@ IRepository<String,Person> repository = new CacheRepository<>(memoryRepository, 
 
 `ValidCacheRepository` is an abstract class that will ensure that before retrieving an element from the cache , it is first validated to confirm that the element is still valid.
 
-<p align="center"> 
+<p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/ValidCacheRepository.png">
 </p>
 
@@ -143,7 +143,7 @@ IRepository<String,Person> repository = new CacheRepository<>(memoryRepository, 
 
 `TimedCacheRepository` is an implementation of `ValidCacheRepository` that checks the validity of entities based on the time they are cached. If the cached time of an entity exceeds the `expirationTime`, the entity is considered not valid and will be fetched from the source repository.
 
-<p align="center"> 
+<p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/TimedCacheRepository.png">
 </p>
 
@@ -162,7 +162,7 @@ IRepository<String,Person> repository = new TimedCacheRepository<>(memoryReposit
 
 `CloneRepository` is a wrapper repository that ensures that the entities sent to and received by the source repository will only be handled by the source repository itself. This implementation is helpful when we want to be able to change the objects returned by the repository without altering the repository's state.
 
-<p align="center"> 
+<p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/CloneRepository.png">
 </p>
 
@@ -183,7 +183,7 @@ IRepository<String,Person> repository = new CloneRepository<>(sourceRepository, 
 
 `LoggerRepository` is an abstract wrapper repository that logs all stages of each operation of source repository.
 
-<p align="center"> 
+<p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/LoggerRepository.png">
 </p>
 
@@ -191,7 +191,7 @@ IRepository<String,Person> repository = new CloneRepository<>(sourceRepository, 
 
 `SimpleLoggerRepository` is an implementation of `LoggerRepository`  that will send a simple message on each event for the supplied `Consumer`.
 
-<p align="center"> 
+<p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/SimpleLoggerRepository.png">
 </p>
 
@@ -204,8 +204,8 @@ Here are some examples for the supplied messages:
 
 #### Usage
 ```java
-Function<Person,String> keyExtractor = person -> person.id;  
-IRepository<String,Person> sourceRepository = new MemoryRepository<>(keyExtractor);  
+Function<Person,String> keyExtractor = person -> person.id;
+IRepository<String,Person> sourceRepository = new MemoryRepository<>(keyExtractor);
 IRepository<String,Person> repository = new SimpleLoggerRepository<>(sourceRepository, keyExtractor, System.out::println);
 ```
 
@@ -213,7 +213,7 @@ IRepository<String,Person> repository = new SimpleLoggerRepository<>(sourceRepos
 
 `NullFreeRepository` is a wrapper repository that ensures that null values are not accepted or returned by the source repository. This implementation is helpful when we are working with repositories that are not null safe.
 
-<p align="center"> 
+<p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/NullFreeRepository.png">
 </p>
 
@@ -234,13 +234,13 @@ IRepository<String,Person> repository = new NullFreeRepository<>(sourceRepositor
 
 `ThreadSafeRepository` is a wrapper repository that guarantees thread-safe access to the source repository. This implementation uses a `ReentrantReadWriteLock`, ensuring that multiple read operations can occur simultaneously, while permitting only one write operation at any given time.
 
-<p align="center"> 
+<p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/ThreadSafeRepository.png">
 </p>
 
 #### Usage
 ```java
-IRepository<String,Person> sourceRepository = new MemoryRepository<>(person -> person.id);  
+IRepository<String,Person> sourceRepository = new MemoryRepository<>(person -> person.id);
 IRepository<String,Person> repository = new ThreadSafeRepository<>(sourceRepository);
 ```
 
@@ -248,7 +248,7 @@ IRepository<String,Person> repository = new ThreadSafeRepository<>(sourceReposit
 
 `ValidatorRepository` is a wrapper repository that ensures that the entities stored on the source repository are validated before their storage.
 
-<p align="center"> 
+<p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/ValidatorRepository.png">
 </p>
 
@@ -258,11 +258,11 @@ IRepository<String,Person> repository = new ThreadSafeRepository<>(sourceReposit
 
 #### Usage
 ```java
-IRepository<String,Person> sourceRepository = new MemoryRepository<>(person -> person.id);  
+IRepository<String,Person> sourceRepository = new MemoryRepository<>(person -> person.id);
 IValidator<Person> validator = person -> {
 	if(person.name == null) {
 		throw new RepostoryException("Name property cannot be null!");
 	}
-};  
+};
 IRepository<String,Person> repository = new ValidatorRepository<>(sourceRepository, validator);
 ```
