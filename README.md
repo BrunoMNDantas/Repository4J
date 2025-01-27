@@ -51,6 +51,12 @@ Every repository should implement the following methods:
 - **update(E entity): void** - Updates the `entity` received as parameter. This method can throw `NonExistentEntityException` if the key of the `entity` is not present on the repository.
 - **delete(K key): void** - Delete the entity with the `key` received as parameter. This method can throw `NonExistentEntityException` if the `key` is not present on the repository.
 
+The diagram below provides a complete overview of all implementations of `IRepository`.
+
+<p align="center"> 
+	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/Overall.png">
+</p>
+
 # Implementations
 
 Let's assume that there is a class `Person` with two properties (`id` and `name`).
