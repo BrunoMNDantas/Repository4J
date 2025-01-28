@@ -313,13 +313,13 @@
         <mxCell id="Q_M1gPjsVnpCpCsMuv0t-1" value="&amp;lt;&amp;lt;abstract&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ValidCacheRepository&amp;lt;K,E&amp;gt;&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="320" y="200" width="280" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="R9_eT3O0nOCXPqwlFoRQ-1" value="&lt;div&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Entrt&amp;lt;K&amp;gt;&lt;/b&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="R9_eT3O0nOCXPqwlFoRQ-1" value="&lt;div&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Entry&amp;lt;K&amp;gt;&lt;/b&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="620" y="280" width="100" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="R9_eT3O0nOCXPqwlFoRQ-2" value="# key: K" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;fillColor=default;" vertex="1" parent="R9_eT3O0nOCXPqwlFoRQ-1">
+        <mxCell id="R9_eT3O0nOCXPqwlFoRQ-2" value="# key: K" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;fillColor=default;" parent="R9_eT3O0nOCXPqwlFoRQ-1" vertex="1">
           <mxGeometry y="30" width="100" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="R9_eT3O0nOCXPqwlFoRQ-3" value="# date: long" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;fillColor=default;" vertex="1" parent="R9_eT3O0nOCXPqwlFoRQ-1">
+        <mxCell id="R9_eT3O0nOCXPqwlFoRQ-3" value="# date: long" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;fillColor=default;" parent="R9_eT3O0nOCXPqwlFoRQ-1" vertex="1">
           <mxGeometry y="50" width="100" height="20" as="geometry" />
         </mxCell>
       </root>
