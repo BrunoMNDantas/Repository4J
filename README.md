@@ -98,7 +98,7 @@ IRepository<String,Person> repository = new MemoryRepository<>(person -> person.
 
 ### JsonDiskRepository
 
-`JsonDiskRepository` is an implementation of `DiskRepository`  that will use Json format to store the entities.
+`JsonDiskRepository` is an extension of `DiskRepository` that will use Json format to store the entities.
 
 <p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/JsonDiskRepository.png">
@@ -113,10 +113,10 @@ IRepository<String,Person> repository = new JsonDiskRepository<>(directory, keyE
 
 ## CacheRepository
 
-`CacheRepository` provides a caching mechanism for repositories, enhancing performance by reducing direct interactions with the source repository. It wraps around two repositories: a **cache repository** and a **source repository**, ensuring the cache stays synchronized with the source. 
+`CacheRepository` provides a caching mechanism for repositories, enhancing performance by reducing direct interactions with the source repository. It wraps around two repositories: a **cache repository** and a **source repository**, ensuring the cache stays synchronized with the source.
 
 #### Methods with relevant details
-- **getAll(): Collection\<E>** - This method will allways fetch all elements from source repository and insert them (if not present) on cache repository. 
+- **getAll(): Collection\<E>** - This method will allways fetch all elements from source repository and insert them (if not present) on cache repository.
 - **get(K key): E** - This method will get the entity from cache repository, if not present it will fetch it from the source repository and insert it on the cache.
 - **insert(E entity): void** - This operation will be reflected on both repositories (first on source then on cache).
 - **update(E entity): void** - This operation will be reflected on both repositories (first on source then on cache).
@@ -136,7 +136,7 @@ IRepository<String,Person> repository = new CacheRepository<>(memoryRepository, 
 
 ### ValidCacheRepository
 
-`ValidCacheRepository` is an abstract class that will ensure that before retrieving an element from the cache , it is first validated to confirm that the element is still valid.
+`ValidCacheRepository` is an abstract class that will ensure that before retrieving an element from the cache, it is first validated to confirm that the element is still valid.
 
 <p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/ValidCacheRepository.png">
@@ -147,7 +147,7 @@ IRepository<String,Person> repository = new CacheRepository<>(memoryRepository, 
 
 ### TimedCacheRepository
 
-`TimedCacheRepository` is an implementation of `ValidCacheRepository` that checks the validity of entities based on the time they are cached. If the cached time of an entity exceeds the `expirationTime`, the entity is considered not valid and will be fetched from the source repository.
+`TimedCacheRepository` is an extension of `ValidCacheRepository` that checks the validity of entities based on the time they are cached. If the cached time of an entity exceeds the `expirationTime`, the entity is considered not valid and will be fetched from the source repository.
 
 <p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/TimedCacheRepository.png">
@@ -195,7 +195,7 @@ IRepository<String,Person> repository = new CloneRepository<>(sourceRepository, 
 
 ### SimpleLoggerRepository
 
-`SimpleLoggerRepository` is an implementation of `LoggerRepository`  that will send a simple message on each event for the supplied `Consumer`.
+`SimpleLoggerRepository` is an extension of `LoggerRepository`  that will send a simple message on each event for the supplied `Consumer`.
 
 <p align="center">
 	<img src = "https://raw.githubusercontent.com/BrunoMNDantas/Repository4J/master/docs/SimpleLoggerRepository.png">
